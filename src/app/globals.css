@@ -1,27 +1,254 @@
 @import "tailwindcss";
 
+/* ─── Gold & Champagne Wedding Palette ─── */
 :root {
-  --background: #faf9f7;
-  --foreground: #1c1917;
-  --primary: #b91c1c;
-  --primary-hover: #991b1b;
-  --secondary: #f5f5f4;
+  --cream:        #FBF7F4;
+  --champagne:    #F5ECD7;
+  --gold:         #C9A85C;
+  --gold-dark:    #A8863D;
+  --gold-light:   #E8D5A3;
+  --burgundy:     #7A2D45;
+  --burgundy-dk:  #5D1E32;
+  --charcoal:     #2D1B1E;
+  --stone:        #6B5B52;
+  --white:        #FFFFFF;
+  --border:       #E8D5A3;
+
+  /* legacy compat */
+  --background: var(--cream);
+  --foreground: var(--charcoal);
+  --primary: var(--burgundy);
+  --primary-hover: var(--burgundy-dk);
+  --secondary: var(--champagne);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-secondary: var(--secondary);
+  --color-cream:      var(--cream);
+  --color-champagne:  var(--champagne);
+  --color-gold:       var(--gold);
+  --color-gold-dark:  var(--gold-dark);
+  --color-gold-light: var(--gold-light);
+  --color-burgundy:   var(--burgundy);
+  --color-charcoal:   var(--charcoal);
+  --color-stone:      var(--stone);
+  --color-background: var(--cream);
+  --color-foreground: var(--charcoal);
+  --color-primary:    var(--burgundy);
+  --color-primary-hover: var(--burgundy-dk);
+  --color-secondary:  var(--champagne);
+}
+
+/* ─── Base Styles ─── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Georgia, "Times New Roman", serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: var(--font-sans, 'Lato', Arial, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
 }
 
 .font-sans {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, 'Lato', Arial, sans-serif);
 }
+
+/* ─── Gold Divider ─── */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0.5rem auto;
+  max-width: 200px;
+}
+
+.gold-divider-full {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), var(--gold), transparent);
+}
+
+/* ─── Decorative Ornament ─── */
+.ornament {
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+/* ─── Keyframe Animations ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(3deg); }
+  66%       { transform: translateY(-6px) rotate(-2deg); }
+}
+
+@keyframes petal-fall {
+  0%   { transform: translateY(-20px) rotate(0deg) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(100vh) rotate(360deg) translateX(40px); opacity: 0; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Animation Utility Classes ─── */
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* ─── Staggered delays ─── */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* ─── Shimmer text (gold headings) ─── */
+.text-shimmer {
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold), var(--gold-dark));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ─── Card styles ─── */
+.card-elegant {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(44, 27, 30, 0.06), 0 1px 4px rgba(201, 168, 92, 0.08);
+}
+
+.card-champagne {
+  background: var(--champagne);
+  border: 1px solid var(--gold-light);
+  border-radius: 1rem;
+}
+
+/* ─── Input styles ─── */
+.input-elegant {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #E8D5A3;
+  border-radius: 0.75rem;
+  background: #FDFAF6;
+  color: var(--charcoal);
+  font-family: var(--font-sans, 'Lato', Arial, sans-serif);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-elegant:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 92, 0.15);
+}
+
+.input-elegant::placeholder {
+  color: #B8A898;
+}
+
+/* ─── Button styles ─── */
+.btn-primary {
+  background: linear-gradient(135deg, var(--burgundy), var(--burgundy-dk));
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 0.75rem;
+  font-family: var(--font-sans, 'Lato', Arial, sans-serif);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--burgundy-dk), #4A1628);
+  box-shadow: 0 4px 16px rgba(122, 45, 69, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.625rem;
+  font-family: var(--font-sans, 'Lato', Arial, sans-serif);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-gold:hover {
+  box-shadow: 0 4px 12px rgba(201, 168, 92, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ─── Petal decorations ─── */
+.petal {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation: petal-fall linear infinite;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
